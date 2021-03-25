@@ -1,9 +1,9 @@
-from conftest import improved_find_by
 from selenium.webdriver.common.by import By
-from pages.myaccount import MyAccount
+from newclass import NewClass
+import pages.myaccount
 
 
-class AuthPage:
+class AuthPage(NewClass):
     def __init__(self, driver):
         self.driver = driver
 
@@ -14,7 +14,7 @@ class AuthPage:
     }
 
     def login(self, user_name, password):
-        improved_find_by(self.driver, self.locator_dictionary['email'][0], 10, self.locator_dictionary['email'][1]).send_keys(user_name)
-        improved_find_by(self.driver, self.locator_dictionary['password'][0], 10, self.locator_dictionary['password'][1]).send_keys(password)
-        improved_find_by(self.driver, self.locator_dictionary['submit'][0], 10, self.locator_dictionary['submit'][1]).click()
-        return MyAccount(self.driver)
+        NewClass._find_by(self, *self.locator_dictionary['email']).send_keys(user_name)
+        NewClass._find_by(self, *self.locator_dictionary['password']).send_keys(password)
+        NewClass._find_by(self, *self.locator_dictionary['submit']).click()
+        return pages.myaccount.MyAccount(self.driver)

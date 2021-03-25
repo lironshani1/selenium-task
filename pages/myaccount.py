@@ -1,9 +1,9 @@
-from conftest import improved_find_by
 from selenium.webdriver.common.by import By
-from pages import mainpage
+import pages.mainpage
+from newclass import NewClass
 
 
-class MyAccount:
+class MyAccount(NewClass):
     def __init__(self, driver):
         self.driver = driver
 
@@ -12,5 +12,5 @@ class MyAccount:
     }
 
     def home(self):
-        improved_find_by(self.driver, self.locator_dictionary['home'][0], 10, self.locator_dictionary['home'][1]).click()
-        return mainpage.MainPage(self.driver)
+        NewClass._find_by(self, *self.locator_dictionary['home']).click()
+        return pages.mainpage.MainPage(self.driver)

@@ -23,12 +23,3 @@ def get_driver():
     driver = webdriver.Chrome(desired_capabilities=d)
     driver.quit()
 
-
-def improved_find_by(driver, find_by, seconds_to_wait=10, param=None):
-    try:
-        elem_to_return = WebDriverWait(driver, seconds_to_wait).until(ec.visibility_of_element_located((find_by, param)))
-    except Exception as e:
-        raise e
-    # color_change = f"arguments[0].setAttribute('style', 'background-color:red;')"
-    # driver.execute_script(color_change, elem_to_return)
-    return elem_to_return

@@ -1,10 +1,10 @@
+from newclass import NewClass
 from pages.authpage import AuthPage
 from selenium.webdriver.common.by import By
-from conftest import improved_find_by
 from pages.searchresult import SearchResult
 
 
-class MainPage:
+class MainPage(NewClass):
     def __init__(self, driver):
         self.driver = driver
 
@@ -15,11 +15,11 @@ class MainPage:
     }
 
     def sign_in(self):
-        improved_find_by(self.driver, self.locator_dictionary['login'][0], 10, self.locator_dictionary['login'][1]).click()
+        NewClass._find_by(self, *self.locator_dictionary['login']).click()
         return AuthPage(self.driver)
 
     def search(self, search_value):
-        improved_find_by(self.driver, self.locator_dictionary['search'][0], 10, self.locator_dictionary['search'][1]).send_keys(search_value)
-        improved_find_by(self.driver, self.locator_dictionary['btn_search'][0], 10, self.locator_dictionary['btn_search'][1]).click()
+        NewClass._find_by(self, *self.locator_dictionary['search']).send_keys(search_value)
+        NewClass._find_by(self, *self.locator_dictionary['btn_search']).click()
         return SearchResult
 
